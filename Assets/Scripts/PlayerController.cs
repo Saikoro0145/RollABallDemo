@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     // SerializeField属性を使用して、Unityエディタで移動速度を調整できるようにする。
     // プレイヤーの移動速度。大きいほど速く動く。
-    [SerializeField] private float Speed = 5f;
+    [SerializeField] private float speed = 5f;
 
     // Rigidbody は物理演算を担当するコンポーネント（重力・衝突など）
     private Rigidbody rb;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         // 2D入力（画面の横・縦）を3D空間の移動ベクトルに変換する
         // Y軸（上下）は動かさないので 0 にする
-        Vector3 movement = new Vector3(input.x, 0, input.y) * Speed;
+        Vector3 movement = new Vector3(input.x, 0, input.y) * speed;
 
         // Rigidbody に力（Force）を加えてボールを動かす
         // AddForce はリアルな物理的な動きになる（直接位置を変えるより自然）
