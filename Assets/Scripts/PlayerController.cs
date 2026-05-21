@@ -45,4 +45,19 @@ public class PlayerController : MonoBehaviour
         // AddForce はリアルな物理的な動きになる（直接位置を変えるより自然）
         rb.AddForce(movement);
     }
+
+    /// <summary>
+    /// 他のコライダー（衝突判定）に触れたとき呼ばれるメソッド。
+    /// ただし「トリガー」に設定されたコライダーに触れたときのみ発火する。
+    /// </summary>
+    /// <param name="other">触れた相手のコライダー</param>
+    private void OnTriggerEnter(Collider other)
+    {
+        // 触れた相手のタグが "Item" かどうかを確認する
+        if (other.CompareTag("Item"))
+        {
+            // アイテムのゲームオブジェクトをシーンから削除する（収集）
+            Destroy(other.gameObject);
+        }
+    }
 }
