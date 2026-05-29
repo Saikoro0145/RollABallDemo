@@ -60,4 +60,12 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    /// <summary>
+    /// プレイヤーを完全に停止・固定するメソッド。
+    /// </summary>
+    public void FreezePlayer()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
 }
