@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEditor.Search;
 
 public class InGameManager : MonoBehaviour
 {
@@ -8,11 +7,15 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private TMP_Text GameClearText;
     // プレイヤーの移動を制御するコンポーネント（インスペクターで割り当てる）
     [SerializeField] private PlayerController PlayerController;
+    // ゲームオーバー時に表示するテキストUI（インスペクターで割り当てる）
+    [SerializeField] private TMP_Text GameOverText;
 
     void Start()
     {
         // 最初はゲームクリアテキストを非表示にする
         GameClearText.gameObject.SetActive(false);
+        // 最初はゲームオーバーテキストを非表示にする
+        GameOverText.gameObject.SetActive(false);
     }
 
     void Update()
@@ -25,6 +28,15 @@ public class InGameManager : MonoBehaviour
         {
             // ゲームクリアテキストを表示する
             GameClearText.gameObject.SetActive(true);
+            // プレイヤーの移動を止める
+            PlayerController.FreezePlayer();
+        }
+
+        // プレイヤーが特定の高さ以下に落ちたら
+        if (PlayerController.transform.position.y < -10f)
+        {
+            // ゲームオーバーテキストを表示する
+            GameOverText.gameObject.SetActive(true);
             // プレイヤーの移動を止める
             PlayerController.FreezePlayer();
         }
