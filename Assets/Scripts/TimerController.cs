@@ -17,7 +17,7 @@ public class TimerController : MonoBehaviour
     /// タイマーを 0 からスタートさせるメソッド。
     /// ゲームプレイ開始時に InGameManager から呼ばれる。
     /// </summary>
-    public void Start()
+    public void StartTimer()
     {
         // 経過時間を0にリセットして計測を開始する
         CurrentTime = 0f;

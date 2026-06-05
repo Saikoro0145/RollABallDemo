@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     // 「Move」アクションを参照する変数（Input System で定義したアクション）
     private InputAction moveAction;
 
+    // プレイヤーが動けるかどうかのフラグ。カウントダウン中は false にしておく
+    public bool CanMove = false;
+
     /// <summary>
     /// 最初に一度だけ呼ばれるメソッド。
     /// 必要なコンポーネントの取得と入力アクションの検索を行う。
@@ -33,6 +36,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        // CanMove が false のときは何もせずに処理を抜け
+        if (!CanMove) return;
+
         // 入力の値を Vector2（X軸・Y軸）で読み取る
         // キーボードなら WASD や矢印キー、コントローラーなら左スティックに対応する
         Vector2 input = moveAction.ReadValue<Vector2>();
@@ -66,6 +72,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void FreezePlayer()
     {
+        CanMove = false;
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 }
